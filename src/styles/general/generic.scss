@@ -1,0 +1,22 @@
+@use '@/styles/utils/index.scss' as utils;
+
+body {
+  font-family: utils.$font-primary;
+  color: utils.$color-primary-dark;
+
+  @include utils.apply-styles(utils.$text-body);
+}
+
+a {
+  outline-color: utils.$color-focus;
+}
+
+:root {
+  --onboard-modal-z-index: 100;
+  --onboard-account-select-modal-z-index: 1000;
+}
+
+.container {
+  width: 100%;
+  max-width: 1056px;
+}

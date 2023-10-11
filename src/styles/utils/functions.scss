@@ -1,0 +1,6 @@
+/* Sizing */
+$spacing-unit: 4px; // for margins and paddings
+
+@function spacing-unit($multiplier: 1) {
+  @return $spacing-unit * $multiplier;
+}

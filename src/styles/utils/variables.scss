@@ -1,0 +1,119 @@
+/* Colors */
+// brand colors
+$color-primary: #F30175;
+$color-primary-dark: #022051;
+
+// additional colors
+$color-bloom: #f95399;
+$color-navi: #4d64a1;
+
+// system colors
+$color-focus: #0b9def;
+$color-success: #05ab8d;
+$color-danger: #e92252;
+
+// backgrounds
+$color-white: #ffffff;
+$color-blue: #e6f4ff;
+$color-pink: #ffdfe7;
+$color-dark: rgba(30, 54, 117, 0.4);
+$color-gray: #bcb9db;
+$color-silver: #d3d7e2;
+$color-gray-light: #eff0fa;
+$color-mist: #f4f5fb;
+
+/* Media Query Ranges */
+$small-screen: 640px;
+$medium-screen: 1280px;
+
+/* Fonts */
+$font-primary: 'Roboto';
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-extrabold: 800;
+
+/* Text styles */
+$text-title: (
+  font-size: 32px,
+  line-height: 40px,
+  font-weight: $font-weight-extrabold,
+);
+
+$text-header: (
+  font-size: 24px,
+  line-height: 32px,
+  font-weight: $font-weight-semibold,
+);
+
+$text-amount: (
+  font-size: 24px,
+  line-height: 32px,
+  font-weight: $font-weight-medium,
+);
+
+$text-button-big: (
+  font-size: 16px,
+  line-height: 24px,
+  font-weight: $font-weight-semibold,
+);
+
+$text-button-small: (
+  font-size: 12px,
+  line-height: 16px,
+  font-weight: $font-weight-semibold,
+);
+
+$text-body-medium: (
+  font-size: 18px,
+  line-height: 24px,
+  font-weight: $font-weight-medium,
+);
+
+$text-body: (
+  font-size: 18px,
+  line-height: 24px,
+  font-weight: $font-weight-regular,
+);
+
+$text-body-medium-small: (
+  font-size: 14px,
+  line-height: 16px,
+  font-weight: $font-weight-medium,
+);
+
+$text-body-small: (
+  font-size: 14px,
+  line-height: 16px,
+  font-weight: $font-weight-regular,
+);
+
+$text-link: (
+  font-size: 16px,
+  line-height: 24px,
+  font-weight: $font-weight-regular,
+  text-decoration: underline,
+);
+
+$text-link-small: (
+  font-size: 12px,
+  line-height: 16px,
+  font-weight: $font-weight-regular,
+  text-decoration: underline,
+);
+
+$text-caption: (
+  font-size: 12px,
+  line-height: 16px,
+  font-weight: $font-weight-regular,
+);
+
+/* Transition */
+$transition-duration: 0.2s;
+
+/* App variables */
+$menu-size: 56px;
+
+/* shadows */
+$shadow-1: 0 0 8px rgba(2, 32, 81, 0.16);
+$shadow-2: 0 0 8px rgba(2, 32, 81, 0.08)

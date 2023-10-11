@@ -1,0 +1,73 @@
+@use 'variables' as variables;
+
+/* Apply styles map */
+@mixin apply-styles($styles: ()) {
+  @each $prop, $value in $styles {
+    #{$prop}: $value;
+  }
+}
+
+@mixin button-type-styles($type-styles: (normal: (), hover: (), active: ())) {
+  $normal-styles: map-get($type-styles, 'normal');
+  $hover-styles: map-get($type-styles, 'hover');
+  $active-styles: map-get($type-styles, 'active');
+
+  @include apply-styles($normal-styles);
+
+  &:not(:disabled):hover {
+    @include apply-styles($hover-styles);
+  }
+
+  &:not(:disabled):active {
+    @include apply-styles($active-styles);
+  }
+}
+
+@mixin mobile {
+  @media screen and (max-width: variables.$small-screen - 1px) {
+    @content;
+  }
+}
+
+@mixin tablet-only {
+  @media screen and (min-width: variables.$small-screen) and (max-width: variables.$medium-screen - 1px) {
+    @content;
+  }
+}
+
+@mixin touch {
+  @media screen and (max-width: variables.$medium-screen - 1px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media screen and (min-width: variables.$medium-screen) {
+    @content;
+  }
+}
+
+@mixin tablet-desktop-only {
+  @media screen and (min-width: variables.$small-screen) {
+    @content;
+  }
+}
+
+@mixin absolute-y-center {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@mixin absolute-x-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+@mixin absolute-xy-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

@@ -1,0 +1,12 @@
+@use '@/styles/utils/index.scss' as utils;
+
+// opacity
+.opacity-transition-enter-active,
+.opacity-transition-leave-active {
+  transition: opacity utils.$transition-duration;
+}
+
+.opacity-transition-enter-from,
+.opacity-transition-leave-to {
+  opacity: 0;
+}

@@ -1,0 +1,266 @@
+@use '@/styles/utils/index.scss' as utils;
+
+$button-border-size: 1px;
+$button-border-radius: 8px;
+$button-icon-button-radius: 4px;
+$button-icon-size: 24px;
+$button-icon-size-small: 16px;
+$button-icon-ident: utils.spacing-unit(2);
+
+$button-primary-accent: (
+  normal: (
+    color: utils.$color-white,
+    fill: utils.$color-white,
+    background-color: utils.$color-bloom,
+    border-color: utils.$color-bloom,
+  ),
+  hover: (
+    background-color: utils.$color-primary,
+    border-color: utils.$color-primary,
+  ),
+  active: (
+    background-color: utils.$color-bloom,
+    border-color: utils.$color-bloom,
+  )
+);
+
+$button-primary: (
+  normal: (
+    color: utils.$color-white,
+    fill: utils.$color-white,
+    background-color: utils.$color-navi,
+    border-color: utils.$color-navi,
+  ),
+  hover: (
+    background-color: utils.$color-primary,
+    border-color: utils.$color-primary,
+  ),
+  active: (
+    background-color: utils.$color-bloom,
+    border-color: utils.$color-bloom,
+  )
+);
+
+$button-secondary: (
+  normal: (
+    color: utils.$color-navi,
+    fill: utils.$color-navi,
+    background-color: utils.$color-white,
+    border-color: utils.$color-silver,
+  ),
+  hover: (
+    background-color: utils.$color-primary,
+    border-color: utils.$color-primary,
+    color: utils.$color-white,
+    fill: utils.$color-white,
+  ),
+  active: (
+    background-color: utils.$color-bloom,
+    border-color: utils.$color-bloom,
+  )
+);
+
+$button-ghost: (
+  normal: (
+    color: utils.$color-navi,
+    fill: utils.$color-navi,
+    background-color: transparent,
+    border-color: transparent,
+  ),
+  hover: (
+    background-color: transparent,
+    border-color: transparent,
+  ),
+  active: (
+    background-color: utils.$color-gray-light,
+    border-color: utils.$color-gray-light,
+  )
+);
+
+$button-icon-button: (
+  normal: (
+    color: utils.$color-navi,
+    fill: utils.$color-navi,
+    background-color: transparent,
+    border-color: transparent,
+  ),
+  hover: (
+    color: utils.$color-primary,
+    fill: utils.$color-primary,
+    background-color: utils.$color-gray-light,
+    border-color: utils.$color-gray-light,
+  ),
+  active: (
+    color: utils.$color-primary,
+    fill: utils.$color-primary,
+    background-color: transparent,
+    border-color: transparent,
+  )
+);
+
+$button-padding: (
+  padding: (utils.spacing-unit(3) - $button-border-size) (utils.spacing-unit(6) - $button-border-size)
+);
+
+$button-padding-small: (
+  padding: (utils.spacing-unit(2) - $button-border-size) (utils.spacing-unit(2) - $button-border-size)
+);
+
+$button-padding-ghost: (
+  padding: (utils.spacing-unit(1) - $button-border-size) (utils.spacing-unit(2) - $button-border-size)
+);
+
+$button-padding-icon: (
+  padding: (utils.spacing-unit(1) - $button-border-size) (utils.spacing-unit(1) - $button-border-size)
+);
+
+$button-padding-icon-small: (
+  padding: (utils.spacing-unit(2) - $button-border-size) (utils.spacing-unit(2) - $button-border-size)
+);
+
+$button-padding-icon-ghost: (
+  padding: 0
+);
+
+$button-padding-icon-ghost-small: (
+  padding: (utils.spacing-unit(1) - $button-border-size) (utils.spacing-unit(1) - $button-border-size)
+);
+
+$button-icon-button-padding: (
+  padding: 0
+);
+
+
+
+.button {
+  @include utils.apply-styles(utils.$text-button-big);
+  @include utils.apply-styles($button-padding);
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  text-align: center;
+  cursor: pointer;
+  border-radius: $button-border-radius;
+  outline: none;
+  appearance: none;
+  text-decoration: none;
+  border: $button-border-size solid transparent;
+  transition-duration: utils.$transition-duration;
+  background-origin: border-box;
+  z-index: 0;
+  transition-property:
+    border-color,
+    box-shadow,
+    background-image,
+    opacity,
+    color,
+    background-color;
+
+  &:-moz-focusring,
+  [type='button']:-moz-focusring,
+  [type='reset']:-moz-focusring,
+  [type='submit']:-moz-focusring {
+    outline: none;
+  }
+
+  &:focus-visible:not(:active) {
+    border-color: utils.$color-focus
+  }
+
+  > .app-icon {
+    width: $button-icon-size;
+    height: $button-icon-size;
+    transition: fill utils.$transition-duration;
+
+    &:first-child:not(:last-child) {
+      margin-right: $button-icon-ident;
+    }
+
+    &:last-child:not(:first-child) {
+      margin-left: $button-icon-ident;
+    }
+  }
+
+  &.is-primary-accent {
+    @include utils.button-type-styles($button-primary-accent);
+  }
+
+  &.is-primary {
+    @include utils.button-type-styles($button-primary);
+  }
+
+  &.is-secondary {
+    @include utils.button-type-styles($button-secondary);
+  }
+
+
+  &.is-ghost {
+    @include utils.apply-styles($button-padding-ghost);
+    @include utils.button-type-styles($button-ghost);
+
+    &:focus-visible:not(:active) {
+      background-color: utils.$color-white;
+    }
+
+    &:disabled,
+    &.is-disabled {
+      background-color: transparent;
+      border-color: transparent;
+      color: utils.$color-gray;
+    }
+
+    &.is-icon {
+      @include utils.apply-styles($button-padding-icon-ghost);
+    }
+  }
+
+  &.is-small {
+    @include utils.apply-styles($button-padding-small);
+    @include utils.apply-styles(utils.$text-button-small);
+
+    &.is-ghost {
+      @include utils.apply-styles($button-padding-ghost);
+    }
+
+    &.is-icon {
+      @include utils.apply-styles($button-padding-icon-small);
+
+      &.is-ghost {
+        @include utils.apply-styles($button-padding-icon-ghost-small);
+      }
+
+      > .app-icon {
+        width: $button-icon-size-small;
+        height: $button-icon-size-small;
+      }
+    }
+  }
+
+  &.is-icon {
+    @include utils.apply-styles($button-padding-icon);
+  }
+
+  &.is-icon-button {
+    @include utils.button-type-styles($button-icon-button);
+    @include utils.apply-styles($button-icon-button-padding);
+    border-radius: $button-icon-button-radius;
+
+    > .app-icon {
+      width: $button-icon-size-small;
+      height: $button-icon-size-small;
+    }
+  }
+
+  &:disabled,
+  &.is-disabled {
+    cursor: default;
+    pointer-events: none;
+    background-color: utils.$color-gray-light;
+    border-color: utils.$color-gray-light;
+    color: utils.$color-gray;
+    fill: utils.$color-gray;
+  }
+}
