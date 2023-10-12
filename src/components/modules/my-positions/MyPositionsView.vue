@@ -26,14 +26,14 @@
         <div class="greyBG">
           <div class="row mtMinus">
 
-            <div v-for="position in Object.values(positions)" style="min-width: 300px;" class="col-md-4 col-lg-2 grid-margin stretch-card">
+            <div v-for="position in Object.values(positions)" style="min-width: 300px;"
+              class="col-md-4 col-lg-2 grid-margin stretch-card">
               <div class="card bdrRadius">
                 <div class="card-body p-3">
                   <p class="card-title">
                     <!-- <img src="/src/assets/design/images/ethc-usdc.png" width="40">  -->
                     <img :src="'/icons/' + _get(position, 'token0.symbol', '') + '.svg'" width="20" />
-                    <img class="logo2" :src="'/icons/' + _get(position, 'token1.symbol', '') + '.svg'"
-                      width="20" />
+                    <img class="logo2" :src="'/icons/' + _get(position, 'token1.symbol', '') + '.svg'" width="20" />
                     {{ _get(position,
                       'token0.symbol', '') }}/{{ _get(position, 'token1.symbol', '') }} <img
                       src="/src/assets/design/images/Uniswap.png" width="20" class="right">
@@ -44,7 +44,7 @@
                       <tbody>
                         <tr>
                           <td>Value</td>
-                          <td class="text-right"><small>$</small>{{ position?.currentValue }}</td>
+                          <td class="text-right"><small>$</small>{{ position?.currentValue || 0 }}</td>
                         </tr>
                         <tr>
                           <td>Profit</td>
@@ -132,7 +132,8 @@
                     <div class="input-group mb-0">
                       <input type="text" class="form-control grpBtn p-0 border-0" placeholder="0"
                         @keyup="handleFromWChange" v-model="fromWAmount" aria-label="" aria-describedby="dpstAdd" />
-                      <i class="mdi mdi-close-circle mt-9px mt-3 text-secondary" @click="fromWAmount = ''; toWAmount = '';"></i>
+                      <i class="mdi mdi-close-circle mt-9px mt-3 text-secondary"
+                        @click="fromWAmount = ''; toWAmount = '';"></i>
                       <span class="input-group-text border-0 bg-white hdtitle" id="dpstAdd">
                         <img class="mr-05" :src="_get(pool, 'token0.logo', '')" width="20" height="20" />
                         {{ `${_get(pool, 'token0.symbol', '').toUpperCase()}`
@@ -159,7 +160,8 @@
                     <div class="input-group mb-0">
                       <input type="text" class="form-control grpBtn p-0 border-0" placeholder="0" @keyup="handleToWChange"
                         v-model="toWAmount" aria-label="" aria-describedby="dpstAdd" />
-                      <i class="mdi mdi-close-circle mt-3 text-secondary mt-9px" @click="fromWAmount = ''; toWAmount = '';"></i>
+                      <i class="mdi mdi-close-circle mt-3 text-secondary mt-9px"
+                        @click="fromWAmount = ''; toWAmount = '';"></i>
                       <span class="input-group-text border-0 bg-white hdtitle" id="dpstAdd">
                         <img class="mr-05" :src="_get(pool, 'token1.logo', '')" width="20" height="20" />
                         {{ `${_get(pool, 'token1.symbol', '').toUpperCase()}`
@@ -262,7 +264,7 @@ import { useRootStore } from '@/stores/RootStore';
 import PositionCard from '@/components/PositionCard.vue';
 import AppAlert from '@/components/utils/AppAlert.vue';
 import { AlertType } from '@/types/AlertType';
-import { computed, ref, watch, onMounted } from 'vue';
+import { computed, ref, watch, onMounted, Ref } from 'vue';
 import { INFO_BY_CHAIN } from '@/helpers/constansts/chain';
 import _forEach from "lodash/forEach";
 import _get from "lodash/get";
@@ -273,6 +275,10 @@ import { Chain } from '@/types/chain';
 import { ethers } from 'ethers';
 import { getRates } from '@/helpers/Coingecko';
 import { GeneralHelper } from '@/helpers/GeneralHelper';
+
+type PositionType = {
+  [key: number|string]: any
+}
 
 const rootStore = useRootStore();
 
@@ -285,7 +291,7 @@ const switchNetwork = () => {
 };
 
 const txStatus = ref("");
-const positions: any = ref({});
+const positions: Ref<PositionType> = ref<PositionType>({});
 const rates: any = ref({});
 const totalValue = ref(0);
 const pool: any = ref({});
@@ -387,7 +393,7 @@ const fetchPools = async () => {
 const preparePositions = async () => {
   const markets = rootStore?.markets || {};
   const poolVaults = await ContractService.getPoolsVault();
-  const _positions: any = [];
+  const _positions: PositionType = {};
   const tokens: any = [];
   let _rates: any = {};
   let _totalValue: number = 0;
@@ -405,7 +411,7 @@ const preparePositions = async () => {
   for (let i = 0; i < marketIds.length; i++) {
     const market = markets[marketIds[i]];
     const vault = (poolVaults || {})[market.id];
-    const balances = await ContractService.getPoolBalance(vault, rootStore.walletAddress, Chain.ARBITRUM);
+    const balances: any = await ContractService.getPoolBalance(vault, rootStore.walletAddress, Chain.ARBITRUM);
 
     if (Number(balances?.balanceOf) > 0) {
       const token0Position = Number(ethers.utils.formatUnits(balances.myPositions._amount0ForShares, _get(market, 'token0.decimals', 18)));
@@ -435,6 +441,8 @@ const preparePositions = async () => {
 
   positions.value = _positions;
   totalValue.value = _totalValue;
+
+  console.log("___pp", _positions);
 }
 
 const openWithdraw = (id: string) => {
@@ -541,7 +549,7 @@ const networkLabel = computed(() => INFO_BY_CHAIN[rootStore.selectedChain].label
 .mr-05 {
   margin-right: 0.5rem;
 }
+
 .mt-9px {
   margin-top: 9px !important;
-}
-</style>
+}</style>

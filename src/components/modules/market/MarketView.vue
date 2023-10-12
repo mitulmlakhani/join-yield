@@ -403,7 +403,7 @@ const rates: any = ref({});
 
 let ethToken = { id: 'ETH', symbol: 'ETH', logo: '/icons/ETH.svg', decimals: 18 };
 
-let oneTokens = [
+let oneTokens: Array<any> = [
   ethToken,
   {
     id: '0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9', symbol: 'USDT', logo: '/icons/USDT.svg', decimals: 6

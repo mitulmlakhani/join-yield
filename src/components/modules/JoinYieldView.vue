@@ -12,7 +12,7 @@
             v-model="rootStore.selectedMarket"
             class="join-yield-view-market-select"
             :options="chainOptions"
-            :text-by="option => getMarketLabel(option)"
+            :text-by="(option:any) => getMarketLabel(option)"
           >
             <template #control-icon>
               <AppIcon :name="getMarketIcon(rootStore.selectedMarket)" />
@@ -78,8 +78,8 @@
     // Market.ETHEREUM,
   ]);
 
-const getMarketLabel = (market: Market) => LABEL_BY_MARKET[market];
-const getMarketIcon = (market: Market) => ICON_BY_MARKET[market];
+const getMarketLabel: any = (market: Market) => LABEL_BY_MARKET[market];
+const getMarketIcon: any = (market: Market) => ICON_BY_MARKET[market];
 </script>
 
 <style lang="scss" scoped>
